@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
+import { getAll } from './common/BooksApi'
+import Books from './components/Books'
 import logo from './logo.svg';
 import './App.css';
 
+
 class App extends Component {
+
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    getAll().then(response => {
+      console.log(response)
+      this.setState({ books: response })
+    })
+  }
+
   render() {
+    let books = this.state.books
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Books books={books}/>
       </div>
     );
   }
