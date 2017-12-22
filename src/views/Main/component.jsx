@@ -6,12 +6,9 @@ export default ({ currentlyReading, wantToRead, read }) => {
     return (
         <div>
 
-            <Header content="Currently Reading"/>
-            <Books books={currentlyReading}/>
-            <Header content="Want to React"/>
-            <Books books={wantToRead}/>
-            <Header content="Read"/>
-            <Books books={read}/>
+            <Books title="Currently Reading" books={currentlyReading} />
+            <Books title="Want to React" books={wantToRead} />
+            <Books title="Read" books={read} />
 
         </div>
     );

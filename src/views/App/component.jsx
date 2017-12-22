@@ -16,7 +16,7 @@ export default ({ books }) => {
           // verificar logon..
           return <AppHeader />
         }} />
-        <Container>
+        <Container fluid>
           <Route exact path="/login" component={LoginView} />
           <Route exact path="/" component={MainView} />
         </Container>
