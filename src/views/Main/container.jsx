@@ -1,13 +1,14 @@
 import React from 'react'
 import Component from './component'
-import { getAll } from './../../common/api/books'
+import { getAll, update } from './../../common/api/books'
 
 export default class extends React.Component {
 
     state = {
         currentlyReading: [],
         wantToRead: [],
-        read: []
+        read: [],
+        loading: false
     }
 
     componentDidMount() {
@@ -38,8 +39,15 @@ export default class extends React.Component {
         }
     }
 
+    moveBook = async (to, book) => {
+        const response = await update(book, to)
+        this.load()
+    }
+
     render() {
-        return <Component {...this.state} />
+        return <Component
+            {...this.state}
+            moveBook={this.moveBook} />
     }
 
 }
