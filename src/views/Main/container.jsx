@@ -21,16 +21,11 @@ export default class extends React.Component {
         })
         try {
             let result = await getAll()
-            let books = {
-                currentlyReading: [],
-                wantToRead: [],
-                read: []
-            }
-            result.forEach(b => {
-                books[b.shelf].push(b)
-            })
             this.setState({
-                ...books, loading: false
+                currentlyReading: result.filter(e => e.shelf === 'currentlyReading'),
+                wantToRead: result.filter(e => e.shelf === 'wantToRead'),
+                read: result.filter(e => e.shelf === 'read'),
+                loading: false
             })
         } catch (err) {
             this.setState({

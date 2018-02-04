@@ -1,3 +1,20 @@
+# Instruções de Instalação
+
+No diretório da aplicação, instale as dependências:
+
+```
+npm i
+```
+
+# Executando
+
+No diretório da aplicação, execute o seguinte comando:
+
+```
+npm start
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

@@ -2,44 +2,48 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Image, Modal, Grid, Label, Button } from 'semantic-ui-react'
-
-const ImageBlock = styled(Image) `
-    cursor: pointer
-`
+import BookImage from './../BookImage'
 
 export default ({
-    book, moveBook,
+    book, moveBook, current,
     isOpen, open, close
-}) => (
+}) => {
+
+    const baseBook = current || book
+
+    return (
         <Modal
             open={isOpen}
             onOpen={open}
             onClose={close}
             trigger={(
-                <ImageBlock src={book.imageLinks.thumbnail} />
+                <BookImage 
+                    book={baseBook} 
+                    size="small"
+                    current={current} />
             )}
         >
-            <Modal.Header>{book.title}</Modal.Header>
+            <Modal.Header>{baseBook.title}</Modal.Header>
             <Modal.Content>
                 <Grid>
                     <Grid.Column width={6}>
-                        <Image centered src={book.imageLinks.thumbnail} size="small" />
+                        <BookImage book={baseBook} centered size="small" />
                     </Grid.Column>
                     <Grid.Column width={10}>
-                        <p>{book.description}</p>
+                        <p>{baseBook.description}</p>
                         <Label.Group>
-                            {book.language &&
-                                <Label basic content="Language" detail={book.language} />
+                            {baseBook.language &&
+                                <Label basic content="Language" detail={baseBook.language} />
                             }
-                            {book.categories &&
-                                book.categories.map((c, i) =>
+                            {baseBook.categories &&
+                                baseBook.categories.map((c, i) =>
                                     <Label key={i} basic content="Category" detail={c} />)
                             }
-                            {book.publisher &&
-                                <Label basic content="Publisher" detail={book.publisher} />
+                            {baseBook.publisher &&
+                                <Label basic content="Publisher" detail={baseBook.publisher} />
                             }
-                            {book.authors &&
-                                book.authors.map((c, i) =>
+                            {baseBook.authors &&
+                                baseBook.authors.map((c, i) =>
                                     <Label key={i} basic content="Author" detail={c} />)
                             }
                         </Label.Group>
@@ -48,30 +52,30 @@ export default ({
             </Modal.Content>
             <Modal.Actions>
                 <Button.Group>
-                    {book.shelf !== "read" &&
+                    {baseBook.shelf !== "read" &&
                         <Button
                             primary
                             content="Move to reads"
                             onClick={() => {
-                                moveBook('read', book)
+                                moveBook('read', baseBook)
                                 close()
                             }} />
                     }
-                    {book.shelf !== "wantToRead" &&
+                    {baseBook.shelf !== "wantToRead" &&
                         <Button
                             primary
                             content="Move to want to read"
                             onClick={() => {
-                                moveBook('wantToRead', book)
+                                moveBook('wantToRead', baseBook)
                                 close()
                             }} />
                     }
-                    {book.shelf !== "currentlyReading" &&
+                    {baseBook.shelf !== "currentlyReading" &&
                         <Button
                             primary
                             content="Move to reading"
                             onClick={() => {
-                                moveBook('currentlyReading', book)
+                                moveBook('currentlyReading', baseBook)
                                 close()
                             }} />
                     }
@@ -79,3 +83,4 @@ export default ({
             </Modal.Actions>
         </Modal>
     )
+}

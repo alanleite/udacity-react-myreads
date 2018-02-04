@@ -4,7 +4,7 @@ import Books from './../../components/Books'
 
 
 export default ({
-    books, moveBook, loading, onChange, onSearch, firstSearch
+    books, moveBook, loading, onChange, onSearch, firstSearch, currents
 }) => {
     return (
         <div>
@@ -26,6 +26,7 @@ export default ({
                             <Books
                                 title="Results"
                                 books={books}
+                                currents={currents}
                                 moveBook={moveBook} />)
                             : (
                                 <Container>

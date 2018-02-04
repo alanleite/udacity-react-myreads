@@ -9,12 +9,13 @@ export default class extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired,
-        moveBook: PropTypes.func.isRequired
+        moveBook: PropTypes.func.isRequired,
+        currents: PropTypes.object
     }
 
     render() {
 
-        let { title, books, moveBook } = this.props
+        const { title, books, moveBook, currents } = this.props
 
         return (
             <div>
@@ -25,7 +26,8 @@ export default class extends React.Component {
                             <Book
                                 key={i}
                                 book={book}
-                                moveBook={moveBook} />
+                                moveBook={moveBook}
+                                current={currents ? currents[book.id] : null} />
                         ))}
                     </Image.Group>
                 </Container>
